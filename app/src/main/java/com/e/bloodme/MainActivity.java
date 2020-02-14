@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+ master
         setContentView(R.layout.blooddonor);
 
         Button cancelBtn = (Button) findViewById(R.id.cancelBtn);
@@ -23,5 +24,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(startIntent);
             }
         });
+
+        setContentView(R.layout.activity_main);
+
+ master
     }
 }
