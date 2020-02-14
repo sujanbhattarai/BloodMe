@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "417289091623",
+    "firebase_url": "https://bloodme-f0914.firebaseio.com",
+    "project_id": "bloodme-f0914",
+    "storage_bucket": "bloodme-f0914.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417289091623:android:d45addc4d9e1f2a286ec02",
+        "android_client_info": {
+          "package_name": "com.e.bloodme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417289091623-5ueko9oi70cejgdutf0aqm6vc68q8qvt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.e.bloodme",
+            "certificate_hash": "7803f86d5480967969bda27b0b07c2f8e24ded63"
+          }
+        },
+        {
+          "client_id": "417289091623-j264mbion181sfph32dciubc7gmqdfsu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTVsSPoidDHyjvLBkGhy8Nj_b3oZyHyC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417289091623-j264mbion181sfph32dciubc7gmqdfsu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

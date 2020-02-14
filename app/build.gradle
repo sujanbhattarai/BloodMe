@@ -26,10 +26,13 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
  master
 
+ master
+
     master
 
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
 master
+ master
  master
     implementation 'com.google.firebase:firebase-database:16.0.4'
     testImplementation 'junit:junit:4.12'
