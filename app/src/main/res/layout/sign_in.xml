@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/OrangeRed">
+
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
@@ -16,7 +16,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="@color/OrangeRed"
+        android:background="@color/DarkGreen"
         android:text="Login"
         android:textColor="@color/White"
         android:textStyle="bold"
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:foregroundGravity="left"
-        android:src="@drawable/"
+        android:src="@drawable/splitter_foreground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_conversion_absoluteHeight="108dp"
@@ -91,7 +91,7 @@
         android:layout_marginTop="108dp"
         android:fontFamily="@font/zeyada"
         android:gravity="center"
-        android:text="BLOODME"
+        android:text="BloodMe"
         android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,5 +120,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_input" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
