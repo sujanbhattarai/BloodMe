@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DF4747">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="19dp"
+        app:layout_constraintBottom_toTopOf="@+id/YourName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="205dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="13dp"
+            android:background="@null"
+            android:ems="10"
+            android:fontFamily="cursive"
+            android:inputType="textPersonName"
+            android:singleLine="false"
+            android:text="My information"
+            android:textSize="14pt"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="105dp"
+        android:text="DONATE"
+        android:textColor="#F12213"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText8" />
+
+    <TextView
+        android:id="@+id/YourName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="cursive"
+        android:text="Your Name"
+        android:textSize="10pt"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintEnd_toEndOf="@+id/YourAddress"
+        app:layout_constraintStart_toStartOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="19dp"
+        android:ems="10"
+        android:hint="Enter your name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/YourAge"
+        app:layout_constraintEnd_toEndOf="@+id/editText6"
+        app:layout_constraintStart_toStartOf="@+id/YourBloodGroup"
+        app:layout_constraintTop_toBottomOf="@+id/YourName" />
+
+    <TextView
+        android:id="@+id/YourAge"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="5dp"
+        android:fontFamily="cursive"
+        android:text="Your Age"
+        android:textSize="10pt"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editText5"
+        app:layout_constraintEnd_toEndOf="@+id/YourBloodGroup"
+        app:layout_constraintStart_toStartOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="284dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Enter your age"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/YourBloodGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/YourAge" />
+
+    <TextView
+        android:id="@+id/YourBloodGroup"
+        android:layout_width="162dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:fontFamily="cursive"
+        android:text="Your Blood Group"
+        android:textSize="10pt"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editText6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="18dp"
+        android:ems="10"
+        android:hint="Enter your blood type"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/YourAddress"
+        app:layout_constraintEnd_toEndOf="@+id/editText8"
+        app:layout_constraintStart_toStartOf="@+id/YourBloodGroup"
+        app:layout_constraintTop_toBottomOf="@+id/YourBloodGroup" />
+
+    <TextView
+        android:id="@+id/YourAddress"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="cursive"
+        android:text="Your Address"
+        android:textSize="10pt"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editText8"
+        app:layout_constraintEnd_toEndOf="@+id/YourAge"
+        app:layout_constraintStart_toStartOf="@+id/editText8"
+        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+    <EditText
+        android:id="@+id/editText8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="58dp"
+        android:ems="10"
+        android:hint="Enter your address"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/cancelBtn"
+        app:layout_constraintEnd_toEndOf="@+id/editText5"
+        app:layout_constraintStart_toStartOf="@+id/YourBloodGroup"
+        app:layout_constraintTop_toBottomOf="@+id/YourAddress" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="105dp"
+        android:text="@android:string/cancel"
+        android:textColor="#F12213"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.73"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText8"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
