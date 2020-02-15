@@ -40,7 +40,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/cancelBtn"
+        android:id="@+id/donate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="105dp"
@@ -155,13 +155,13 @@
         android:ems="10"
         android:hint="Enter your address"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/cancelBtn"
+        app:layout_constraintBottom_toTopOf="@+id/donate"
         app:layout_constraintEnd_toEndOf="@+id/editText5"
         app:layout_constraintStart_toStartOf="@+id/YourBloodGroup"
         app:layout_constraintTop_toBottomOf="@+id/YourAddress" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/request"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="105dp"
