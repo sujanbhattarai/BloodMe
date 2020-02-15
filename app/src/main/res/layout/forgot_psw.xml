@@ -4,47 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="#42091D">
 
     <Button
         android:id="@+id/button2"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="267dp"
-        android:layout_height="49dp"
-        android:background="@color/colorAccent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="213dp"
+        android:background="#E70909"
         android:text="Button"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="341dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
         tools:text="Submit" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="286dp"
-        android:layout_height="82dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginBottom="33dp"
         android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="227dp"
+        android:textColor="#07F311"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:text="   Enter your email address" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="411dp"
-        android:layout_height="82dp"
-        android:background="#882196F3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="76dp"
+        android:background="#88F3217C"
         android:text="Forgot your Password?"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="68dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
         tools:text="   Forgot your Password?" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="71dp"
-        android:layout_height="52dp"
-        app:srcCompat="@android:drawable/ic_lock_lock"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_height="0dp"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_lock_lock" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
