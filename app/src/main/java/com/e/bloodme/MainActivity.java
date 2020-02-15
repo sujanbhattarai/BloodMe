@@ -13,20 +13,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
- master
-        setContentView(R.layout.blooddonor);
 
-        Button cancelBtn = (Button) findViewById(R.id.cancelBtn);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(), thankyou.class);
-                startActivity(startIntent);
-            }
-        });
+        setContentView(R.layout.sign_in);
 
-        setContentView(R.layout.activity_main);
 
- master
+
+//        Button loginBtn = (Button) findViewById(R.id.login);
+//        loginBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent startIntent = new Intent(getApplicationContext(), thankyou.class);
+//                startActivity(startIntent);
+//            }
+//        });
+
+        //setContentView(R.layout.activity_main);
+
+
     }
 }
