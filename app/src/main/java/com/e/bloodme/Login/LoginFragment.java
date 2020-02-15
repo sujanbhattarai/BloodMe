@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.e.bloodme.R;
+import com.e.bloodme.requested;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +29,6 @@ public class LoginFragment extends Fragment{
     TextInputEditText email, password;
     Button login, signup;
     DatabaseReference registeredUsers;
-    @Nullable
 
 
     @Override
@@ -47,6 +47,7 @@ public class LoginFragment extends Fragment{
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 registeredUsers = FirebaseDatabase.getInstance().getReference().child("User").child("-LoA1aLc1XjX8LDGGlr0");
                 registeredUsers.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -57,6 +58,9 @@ public class LoginFragment extends Fragment{
                         String fPassword = dataSnapshot.child("password").getValue().toString();
                         if((email1.equals(fEmail)) && (password1.equals(fPassword))){
                             Toast.makeText(getContext(), "Welcome" + fEmail, Toast.LENGTH_SHORT).show();
+                            Intent stent = new Intent(getContext(), afterlogin.class);
+                            startActivity(stent);
+                            getActivity().finish();
                         }else{
                             Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_SHORT).show();
                         }

@@ -54,7 +54,6 @@
             android:layout_gravity="center"
             android:layout_margin="25dp"
             android:layout_marginStart="51dp"
-            android:
             android:background="@color/DarkGreen"
             android:text="Blood Request"
             android:textColor="@color/White"
