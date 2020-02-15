@@ -1,20 +1,32 @@
 {
   "project_info": {
+<<<<<<< HEAD
     "project_number": "553604003788",
     "firebase_url": "https://bloodme1-9926b.firebaseio.com",
     "project_id": "bloodme1-9926b",
     "storage_bucket": "bloodme1-9926b.appspot.com"
+=======
+    "project_number": "417289091623",
+    "firebase_url": "https://bloodme-f0914.firebaseio.com",
+    "project_id": "bloodme-f0914",
+    "storage_bucket": "bloodme-f0914.appspot.com"
+>>>>>>> 5ddb191a9ef9587d1f811dbf4edfd83ac81fe4c1
   },
   "client": [
     {
       "client_info": {
+<<<<<<< HEAD
         "mobilesdk_app_id": "1:553604003788:android:697d28c307789804d6cf69",
+=======
+        "mobilesdk_app_id": "1:417289091623:android:d45addc4d9e1f2a286ec02",
+>>>>>>> 5ddb191a9ef9587d1f811dbf4edfd83ac81fe4c1
         "android_client_info": {
           "package_name": "com.e.bloodme"
         }
       },
       "oauth_client": [
         {
+<<<<<<< HEAD
           "client_id": "553604003788-ubtdl1lkti1qll2qbd91m5fefg74tmoh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -24,19 +36,38 @@
         },
         {
           "client_id": "553604003788-8bg23dj2sg0voqf300qlhsnpd540dgok.apps.googleusercontent.com",
+=======
+          "client_id": "417289091623-5ueko9oi70cejgdutf0aqm6vc68q8qvt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.e.bloodme",
+            "certificate_hash": "7803f86d5480967969bda27b0b07c2f8e24ded63"
+          }
+        },
+        {
+          "client_id": "417289091623-j264mbion181sfph32dciubc7gmqdfsu.apps.googleusercontent.com",
+>>>>>>> 5ddb191a9ef9587d1f811dbf4edfd83ac81fe4c1
           "client_type": 3
         }
       ],
       "api_key": [
         {
+<<<<<<< HEAD
           "current_key": "AIzaSyBjTq9DP2DvNNXmKsqQDpbAAiCxMWWnc-I"
+=======
+          "current_key": "AIzaSyDTVsSPoidDHyjvLBkGhy8Nj_b3oZyHyC4"
+>>>>>>> 5ddb191a9ef9587d1f811dbf4edfd83ac81fe4c1
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
+<<<<<<< HEAD
               "client_id": "553604003788-8bg23dj2sg0voqf300qlhsnpd540dgok.apps.googleusercontent.com",
+=======
+              "client_id": "417289091623-j264mbion181sfph32dciubc7gmqdfsu.apps.googleusercontent.com",
+>>>>>>> 5ddb191a9ef9587d1f811dbf4edfd83ac81fe4c1
               "client_type": 3
             }
           ]
