@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#42091D">
+    android:background="@color/IndianRed">
 
     <Button
         android:id="@+id/button2"
@@ -14,6 +14,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginEnd="72dp"
         android:layout_marginBottom="213dp"
+
         android:background="#E70909"
         android:text="Button"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -63,5 +64,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_lock_lock" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

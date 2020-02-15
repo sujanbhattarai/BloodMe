@@ -4,26 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
-import android.view.View;
-import android.content.Intent;
+
+
+import com.e.bloodme.Login.LoginFragment;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    Button btn, sup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
 
-        Button cancelBtn = (Button) findViewById(R.id.cancelBtn);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(), thankyou.class);
-                startActivity(startIntent);
-            }
-        });
+        setContentView(R.layout.activity_main);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame, new LoginFragment()).commit();
 
-        setContentView(R.layout.login);
-
-    }}
+    }
+}

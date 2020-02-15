@@ -7,6 +7,9 @@
     android:background="@drawable/backgroundcolor">
 
 
+
+
+
     <Button
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
@@ -126,6 +129,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reg_password" />
+
     <Button
         android:id="@+id/homebutton"
         android:layout_width="wrap_content"
