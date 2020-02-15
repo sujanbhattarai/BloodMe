@@ -50,7 +50,6 @@
         app:layout_constraintTop_toBottomOf="@+id/reg_mobile" />
 
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
