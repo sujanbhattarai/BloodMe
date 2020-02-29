@@ -14,7 +14,6 @@
         android:layout_marginStart="72dp"
         android:layout_marginEnd="72dp"
         android:layout_marginBottom="213dp"
-        android:background="@color/LightPink"
         android:text="Button"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +31,6 @@
         android:layout_marginBottom="33dp"
         android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-
 
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +55,6 @@
         android:layout_height="0dp"
         android:layout_marginBottom="76dp"
 
-        android:background="#882196F3"
         android:text="Forgot your Password?"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toTopOf="@+id/editText"
@@ -65,6 +62,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         tools:text="   Forgot your Password?" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
