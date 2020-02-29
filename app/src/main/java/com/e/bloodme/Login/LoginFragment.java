@@ -1,9 +1,7 @@
 package com.e.bloodme.Login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +13,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.e.bloodme.R;
-import com.e.bloodme.requested;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginFragment extends Fragment{
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     TextInputEditText email, password;
     Button login, signup;
-    DatabaseReference registeredUsers;
+ //   DatabaseReference registeredUsers;
 
+    private void toastMessage(String message){
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,39 +37,47 @@ public class LoginFragment extends Fragment{
         password = view.findViewById(R.id.password_input);
         login = view.findViewById(R.id.login);
         signup = view.findViewById(R.id.signup);
+
+        mAuth = FirebaseAuth.getInstance();
+
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null){
+                    //User is signed in
+                    Log.d("EmailPassword", "onAuthStateChanged:signed_in:" + user.getUid());
+                    toastMessage("Successfully Signed In with " + user.getEmail());
+
+                }else{
+                    Log.d("EmailPassword", "onAuthStateChanged:signed_out");
+                    toastMessage("Successfully Signed Out ");
+
+                }
+            }
+        };
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction().replace(R.id.frame, new SignupFragment()).commit();
             }
         });
+
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String em = email.getText().toString();
+                String pass = password.getText().toString();
+                if(!em.equals("") && !pass.equals("")){
+                    mAuth.signInWithEmailAndPassword(em, pass);
+                }else{
+                    toastMessage("Incorrect");
+                }
 
-                registeredUsers = FirebaseDatabase.getInstance().getReference().child("User").child("-LoA1aLc1XjX8LDGGlr0");
-                registeredUsers.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String email1 = email.getText().toString();
-                        String password1 = password.getText().toString();
-                        String fEmail = dataSnapshot.child("email").getValue().toString();
-                        String fPassword = dataSnapshot.child("password").getValue().toString();
-                        if((email1.equals(fEmail)) && (password1.equals(fPassword))){
-                            Toast.makeText(getContext(), "Welcome" + fEmail, Toast.LENGTH_SHORT).show();
-                            Intent stent = new Intent(getContext(), afterlogin.class);
-                            startActivity(stent);
-                            getActivity().finish();
-                        }else{
-                            Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
             }
         });
 
