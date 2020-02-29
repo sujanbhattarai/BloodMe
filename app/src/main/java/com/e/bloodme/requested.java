@@ -1,14 +1,13 @@
 package com.e.bloodme;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class thankyou extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
 
+public class requested extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thankyou);
+        setContentView(R.layout.requestty);
     }
 }
