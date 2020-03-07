@@ -1,27 +1,24 @@
-package com.e.bloodme.Login;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.e.bloodme;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.e.bloodme.R;
-import com.e.bloodme.requested;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class blood_requester extends AppCompatActivity {
+public class blooddonate extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blood_requester);
-        Button requestBtn = (Button) findViewById(R.id.button);
+        setContentView(R.layout.blooddonor);
+        Button donateBtn = (Button) findViewById(R.id.donate);
         Button cancelBtn = (Button) findViewById(R.id.request);
-        requestBtn.setOnClickListener(new View.OnClickListener() {
+        donateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(), requested.class);
+                Intent startIntent = new Intent(getApplicationContext(), thankyou.class);
                 startActivity(startIntent);
             }
         });

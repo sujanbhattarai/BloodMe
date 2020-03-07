@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundcolor">
+    android:background="@drawable/backgroundcolor"
+    android:focusableInTouchMode="true">
 
 
 
@@ -31,6 +36,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="01/01/1900"
+        android:singleLine="true"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="Email Address"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:hint="First Name"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -80,6 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="Last Name"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reg_first" />
@@ -92,6 +101,7 @@
         android:ems="10"
         android:hint="Mobile Number"
         android:inputType="phone"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,6 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="Re-enter Email Address"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,6 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="Password"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputEditText2" />
@@ -124,6 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="Re-enter Password"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reg_password" />
@@ -143,3 +156,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -5,7 +5,7 @@ public class User extends Date {
     private String password;
     private String first;
     private String last;
-    private int mobile;
+    private long mobile;
 
     public User() {
         //we call the default constructor of Date
@@ -17,7 +17,7 @@ public class User extends Date {
         email = "unknown";
         password = "unknown";
     }
-    public User (String dob, String fn, String ln, String e, int s, String p) {
+    public User (String dob, String fn, String ln, String e, long s, String p) {
         super(dob);
         first = fn;
         last = ln;
@@ -33,12 +33,12 @@ public class User extends Date {
         this.email = email;
     }
 
-    public int getMobile() {
+    public long getMobile() {
         return mobile;
     }
 
     public void setMobile(String mob) {
-        this.mobile = (Integer.parseInt(mob));
+        this.mobile = (Long.parseLong(mob));
     }
 
     public String getfirst() {
@@ -66,10 +66,6 @@ public class User extends Date {
     }
 
     public void setDOB(String s){
-        this.setDate(s);
-    }
-    public void setDOB(int m, int d, int y){
-        String date = m+"/"+d+"/"+y;
-        this.setDate(date);
+        super.setDate(s);
     }
 }

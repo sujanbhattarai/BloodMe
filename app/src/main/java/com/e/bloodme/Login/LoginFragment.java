@@ -1,5 +1,6 @@
 package com.e.bloodme.Login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.e.bloodme.R;
+import com.e.bloodme.afterlogin;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,10 +26,24 @@ public class LoginFragment extends Fragment{
 
     TextInputEditText email, password;
     Button login, signup;
- //   DatabaseReference registeredUsers;
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        mAuth.addAuthStateListener(mAuthListener);
+    }
     private void toastMessage(String message){
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        if (mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     @Override
@@ -37,7 +53,6 @@ public class LoginFragment extends Fragment{
         password = view.findViewById(R.id.password_input);
         login = view.findViewById(R.id.login);
         signup = view.findViewById(R.id.signup);
-
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -49,11 +64,11 @@ public class LoginFragment extends Fragment{
                     //User is signed in
                     Log.d("EmailPassword", "onAuthStateChanged:signed_in:" + user.getUid());
                     toastMessage("Successfully Signed In with " + user.getEmail());
-
+                    Intent i = new Intent(getActivity(), afterlogin.class);
+                    getContext().startActivity(i);
                 }else{
                     Log.d("EmailPassword", "onAuthStateChanged:signed_out");
                     toastMessage("Successfully Signed Out ");
-
                 }
             }
         };

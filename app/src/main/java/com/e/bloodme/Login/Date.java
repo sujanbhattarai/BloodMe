@@ -1,7 +1,6 @@
 package com.e.bloodme.Login;
 
 //look for TODO to see what need TODO
-import java.util.*;
 public class Date {
     private int day;
     private int month;
@@ -46,6 +45,9 @@ public class Date {
         return st;
     }
     //getters
+    public String getDate() {
+        return this.toString();
+    }
     public int getDay() {
         return day;
     }

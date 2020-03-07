@@ -15,11 +15,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.e.bloodme.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignupFragment extends Fragment {
     TextInputEditText email, password, first, last, textInputEditText, textInputEditText2 ;
@@ -31,7 +37,7 @@ public class SignupFragment extends Fragment {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("message").child("User");
 
-
+    public static final String TAG = "YOUR-TAG-NAME";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,15 +63,34 @@ public class SignupFragment extends Fragment {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user.setEmail(email.getText().toString());
-                user.setFirst(first.getText().toString());
-                user.setLast(last.getText().toString());
-                user.setDOB(dob.getText().toString());
-                user.setMobile(mobile.getText().toString());
-                user.setPassword(password.getText().toString());
-                myRef.push().setValue(user);
-                Toast.makeText(getContext(), "Successfully registered", Toast.LENGTH_SHORT).show();
-                getFragmentManager().beginTransaction().replace(R.id.frame, new LoginFragment()).commit();
+                boolean end = validateForm();
+                if(end == true){
+                    user.setEmail(email.getText().toString());
+                    user.setFirst(first.getText().toString());
+                    user.setLast(last.getText().toString());
+                    user.setDOB(dob.getText().toString());
+                    user.setMobile(mobile.getText().toString());
+                    user.setPassword(password.getText().toString());
+                    mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                toastMessage("Successfully registered");
+                                FirebaseUser user1 = mAuth.getCurrentUser();
+                                String UID = user1.getUid();
+                                myRef.child(UID).child("User Info").child("Email").setValue(user.getEmail());
+                                myRef.child(UID).child("User Info").child("First Name").setValue(user.getfirst());
+                                myRef.child(UID).child("User Info").child("Last Name").setValue(user.getlast());
+                                myRef.child(UID).child("User Info").child("Date of Birth").setValue(user.getDate());
+                                myRef.child(UID).child("User Info").child("Mobile").setValue(user.getMobile());
+                                mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword());
+                            }
+                        }
+                    });
+                }else{
+                    toastMessage("Please complete the form");
+                }
+
             }
         });
 
@@ -85,6 +110,24 @@ public class SignupFragment extends Fragment {
                 }
             }
         };
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                //String value = dataSnapshot.getValue(String.class);
+                Object value = dataSnapshot.getValue();
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
 
         return view;

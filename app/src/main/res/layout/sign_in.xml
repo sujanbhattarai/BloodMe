@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/OrangeRed">
+    android:background="@color/OrangeRed"
+    android:focusableInTouchMode="true">
 
     <Button
         android:id="@+id/login"
@@ -77,9 +78,7 @@
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="108dp"
-
         android:gravity="center"
         android:text="BloodMe"
         android:textSize="50dp"
@@ -94,7 +93,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-
+        android:singleLine="true"
         android:hint="Enter Your Email Address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +104,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-
+        android:singleLine="true"
         android:hint="Enter your password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
