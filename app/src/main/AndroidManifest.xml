@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".thankyou"></activity>
+        <activity android:name=".forgotpassword"></activity>
         <activity android:name=".afterlogin"></activity>
         <activity android:name=".blood_requester"></activity>
         <activity android:name=".blooddonate"></activity>

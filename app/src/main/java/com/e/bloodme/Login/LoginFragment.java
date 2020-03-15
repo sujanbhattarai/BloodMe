@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.e.bloodme.ForgotPassword;
+import com.e.bloodme.forgotpassword;
 import com.e.bloodme.R;
 import com.e.bloodme.afterlogin;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,15 +31,15 @@ public class LoginFragment extends AppCompatActivity {
     TextView forgetPassword;
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        if(currentUser == null){
-            Intent login = new Intent(getApplicationContext(), afterlogin.class);
-            startActivity(login);
-        }
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        if(currentUser == null){
+//            Intent login = new Intent(getApplicationContext(), afterlogin.class);
+//            startActivity(login);
+//        }
+//    }
 
     private void toastMessage(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
@@ -92,7 +92,7 @@ public class LoginFragment extends AppCompatActivity {
         forgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(LoginFragment.this, ForgotPassword.class);
+                Intent i = new Intent(LoginFragment.this, forgotpassword.class);
                 startActivity(i);
             }
         });
