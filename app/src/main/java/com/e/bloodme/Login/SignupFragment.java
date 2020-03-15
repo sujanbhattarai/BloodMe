@@ -1,20 +1,20 @@
 package com.e.bloodme.Login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.e.bloodme.R;
+import com.e.bloodme.afterlogin;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -27,7 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class SignupFragment extends Fragment {
+public class SignupFragment extends AppCompatActivity {
     TextInputEditText email, password, first, last, textInputEditText, textInputEditText2 ;
     EditText dob, mobile;
     Button register, homebutton;
@@ -38,25 +38,58 @@ public class SignupFragment extends Fragment {
     DatabaseReference myRef = database.getReference("message").child("User");
 
     public static final String TAG = "YOUR-TAG-NAME";
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.login, null);
-        email = view.findViewById(R.id.reg_email);
-        password = view.findViewById(R.id.reg_password);
-        dob = view.findViewById(R.id.reg_dob);
-        first = view.findViewById(R.id.reg_first);
-        last = view.findViewById(R.id.reg_last);
-        mobile = view.findViewById(R.id.reg_mobile);
-        register = view.findViewById(R.id.btn_register);
-        homebutton = view.findViewById(R.id.homebutton);
+    public class AsteriskPasswordTransformationMethod extends PasswordTransformationMethod {
+        @Override
+        public CharSequence getTransformation(CharSequence source, View view) {
+            return new PasswordCharSequence(source);
+        }
+
+        private class PasswordCharSequence implements CharSequence {
+            private CharSequence mSource;
+
+            public PasswordCharSequence(CharSequence source) {
+                mSource = source; // Store char sequence
+            }
+
+            public char charAt(int index) {
+                return '*'; // This is the important part
+            }
+
+            public int length() {
+                return mSource.length(); // Return default
+            }
+
+            public CharSequence subSequence(int start, int end) {
+                return mSource.subSequence(start, end); // Return default
+            }
+        }
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login);
+        mAuth = FirebaseAuth.getInstance();
+        email = findViewById(R.id.reg_email);
+        password = findViewById(R.id.reg_password);
+        textInputEditText = findViewById(R.id.textInputEditText);
+        dob = findViewById(R.id.reg_dob);
+        first =findViewById(R.id.reg_first);
+        last = findViewById(R.id.reg_last);
+        mobile = findViewById(R.id.reg_mobile);
+        register = findViewById(R.id.btn_register);
+        homebutton = findViewById(R.id.homebutton);
         user = new User();
+
+        password.setTransformationMethod(new AsteriskPasswordTransformationMethod());
+        textInputEditText.setTransformationMethod(new AsteriskPasswordTransformationMethod());
 
         homebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.frame, new LoginFragment()).commit();
+                Intent i = new Intent(getApplicationContext(), LoginFragment.class);
+                startActivity(i);
             }
         });
 
@@ -71,6 +104,7 @@ public class SignupFragment extends Fragment {
                     user.setDOB(dob.getText().toString());
                     user.setMobile(mobile.getText().toString());
                     user.setPassword(password.getText().toString());
+
                     mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -83,7 +117,21 @@ public class SignupFragment extends Fragment {
                                 myRef.child(UID).child("User Info").child("Last Name").setValue(user.getlast());
                                 myRef.child(UID).child("User Info").child("Date of Birth").setValue(user.getDate());
                                 myRef.child(UID).child("User Info").child("Mobile").setValue(user.getMobile());
-                                mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword());
+                                mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
+                                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if(task.isSuccessful()){
+                                                    Intent login = new Intent(getApplicationContext(), afterlogin.class);
+                                                    startActivity(login);
+                                                    toastMessage("Signed In Successfully");
+                                                }else{
+                                                    String message = task.getException().toString();
+                                                    toastMessage("Error");
+                                                }
+
+                                            }
+                                        });
                             }
                         }
                     });
@@ -128,12 +176,9 @@ public class SignupFragment extends Fragment {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-
-        return view;
     }
     private void toastMessage(String message){
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
     private boolean validateForm() {
         boolean valid = true;

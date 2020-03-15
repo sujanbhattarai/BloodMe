@@ -20,6 +20,8 @@
         <activity android:name=".blood_requester"></activity>
         <activity android:name=".blooddonate"></activity>
         <activity android:name=".requested"></activity>
+        <activity android:name=".Login.LoginFragment"></activity>
+        <activity android:name=".Login.SignupFragment"></activity>
     </application>
 
 </manifest>

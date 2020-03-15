@@ -1,5 +1,6 @@
 package com.e.bloodme;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame, new LoginFragment()).commit();
+        Intent i = new Intent(getApplicationContext(), LoginFragment.class);
+        startActivity(i);
 }
 }
