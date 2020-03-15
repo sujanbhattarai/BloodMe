@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.e.bloodme.ForgotPassword;
 import com.e.bloodme.R;
 import com.e.bloodme.afterlogin;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,13 +22,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginFragment extends AppCompatActivity {
-
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     TextInputEditText email, password;
     Button login, signup;
+    TextView forgetPassword;
 
 
     @Override
@@ -75,6 +77,7 @@ public class LoginFragment extends AppCompatActivity {
         signup = findViewById(R.id.signup);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        forgetPassword = findViewById(R.id.textView4);
 
         password.setTransformationMethod(new AsteriskPasswordTransformationMethod());
 
@@ -86,6 +89,13 @@ public class LoginFragment extends AppCompatActivity {
             }
         });
 
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginFragment.this, ForgotPassword.class);
+                startActivity(i);
+            }
+        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +108,7 @@ public class LoginFragment extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
-                                        Intent login = new Intent(getApplicationContext(), afterlogin.class);
+                                        Intent login = new Intent(LoginFragment.this, afterlogin.class);
                                         startActivity(login);
                                         toastMessage("Signed In Successfully");
                                     }else{
