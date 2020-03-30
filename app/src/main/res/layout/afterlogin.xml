@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/IndianRed">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <Button
+            android:id="@+id/Donate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="25dp"
+            android:layout_marginTop="244dp"
+            android:layout_marginEnd="59dp"
+            android:background="@color/DarkGreen"
+            android:text="Blood Donate"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/Exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="25dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="252dp"
+            android:background="@color/DarkGreen"
+            android:text="Sign Out"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/request"
+            app:layout_constraintTop_toBottomOf="@+id/request" />
+
+        <Button
+            android:id="@+id/Request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="25dp"
+            android:layout_marginStart="51dp"
+            android:background="@color/DarkGreen"
+            android:text="Blood Request"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/Donate"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

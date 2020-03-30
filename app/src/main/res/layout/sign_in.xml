@@ -1,9 +1,14 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/OrangeRed">
+    android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/OrangeRed"
+    android:focusableInTouchMode="true">
 
     <Button
         android:id="@+id/login"
@@ -49,10 +54,8 @@
         android:layout_height="66dp"
         android:layout_gravity="center"
         android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginRight="70dp"
         android:padding="15dp"
         android:text="Forgot Password?"
         android:textSize="22dp"
@@ -92,6 +95,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:singleLine="true"
         android:hint="Enter Your Email Address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,6 +106,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:singleLine="true"
         android:hint="Enter your password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,3 +115,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

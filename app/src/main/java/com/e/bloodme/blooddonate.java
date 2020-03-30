@@ -7,18 +7,18 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class blood_requester extends AppCompatActivity {
+public class blooddonate extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blood_requester);
-        Button requestBtn = (Button) findViewById(R.id.button);
+        setContentView(R.layout.blooddonor);
+        Button donateBtn = (Button) findViewById(R.id.donate);
         Button cancelBtn = (Button) findViewById(R.id.request);
-        requestBtn.setOnClickListener(new View.OnClickListener() {
+        donateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(), requested.class);
+                Intent startIntent = new Intent(getApplicationContext(), thankyou.class);
                 startActivity(startIntent);
             }
         });
