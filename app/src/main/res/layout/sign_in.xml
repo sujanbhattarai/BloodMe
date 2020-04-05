@@ -1,9 +1,14 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/OrangeRed">
+    android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/OrangeRed"
+    android:focusableInTouchMode="true">
 
     <Button
         android:id="@+id/login"
@@ -43,21 +48,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="256dp"
         android:layout_height="66dp"
         android:layout_gravity="center"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="70dp"
         android:padding="15dp"
         android:text="Forgot Password?"
         android:textSize="22dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login" />
 
@@ -77,9 +80,7 @@
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="108dp"
-
         android:gravity="center"
         android:text="BloodMe"
         android:textSize="50dp"
@@ -94,7 +95,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-
+        android:singleLine="true"
         android:hint="Enter Your Email Address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +106,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-
+        android:singleLine="true"
         android:hint="Enter your password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,3 +115,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
