@@ -78,6 +78,7 @@ public class blooddonate extends AppCompatActivity {
         } else {
             blood.setError(null);
         }
+
         String[] array = {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
         for(int i=0; i< array.length; i++) {
             if(!array[i].equalsIgnoreCase(blood1)) {
