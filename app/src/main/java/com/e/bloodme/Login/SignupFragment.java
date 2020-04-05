@@ -180,6 +180,9 @@ public class SignupFragment extends AppCompatActivity {
     private void toastMessage(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
     private boolean validateForm() {
         boolean valid = true;
 
@@ -190,6 +193,10 @@ public class SignupFragment extends AppCompatActivity {
         } else {
             email.setError(null);
         }
+        if (!isEmailValid(em)){
+            toastMessage("Your Email Id is Invalid.");
+            valid = false;
+        }
 
 
         String pass = password.getText().toString();
@@ -198,6 +205,16 @@ public class SignupFragment extends AppCompatActivity {
             valid = false;
         } else {
             password.setError(null);
+        }
+        if(pass.length() <= 6) {
+            toastMessage("Your password must be greater than 6 characters!");
+            valid = false;
+        }
+
+        String mob = mobile.getText().toString();
+        if(mob.length() != 10){
+            toastMessage("Please Enter the Valid Mobile Number!");
+            valid = false;
         }
 
         return valid;
