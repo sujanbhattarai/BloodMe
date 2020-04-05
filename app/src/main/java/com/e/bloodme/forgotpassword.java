@@ -55,7 +55,11 @@ public class forgotpassword extends AppCompatActivity {
                             });
                 }
             }
+<<<<<<< HEAD
         });
+=======
+            });
+>>>>>>> upstream/master
         cancel_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
