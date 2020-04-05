@@ -111,12 +111,14 @@ public class SignupFragment extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 toastMessage("Successfully registered");
                                 FirebaseUser user1 = mAuth.getCurrentUser();
-                                String UID = user1.getUid();
-                                myRef.child(UID).child("User Info").child("Email").setValue(user.getEmail());
-                                myRef.child(UID).child("User Info").child("First Name").setValue(user.getfirst());
-                                myRef.child(UID).child("User Info").child("Last Name").setValue(user.getlast());
-                                myRef.child(UID).child("User Info").child("Date of Birth").setValue(user.getDate());
-                                myRef.child(UID).child("User Info").child("Mobile").setValue(user.getMobile());
+                                String id = myRef.push().getKey();
+                                myRef.child(id).setValue(user);
+//                                String UID = user1.getUid();
+//                                myRef.child(UID).child("User Info").child("Email").setValue(user.getEmail());
+//                                myRef.child(UID).child("User Info").child("First Name").setValue(user.getfirst());
+//                                myRef.child(UID).child("User Info").child("Last Name").setValue(user.getlast());
+//                                myRef.child(UID).child("User Info").child("Date of Birth").setValue(user.getDate());
+//                                myRef.child(UID).child("User Info").child("Mobile").setValue(user.getMobile());
                                 mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
                                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
