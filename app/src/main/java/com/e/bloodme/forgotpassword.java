@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.e.bloodme.Login.LoginFragment;
+//import com.e.bloodme.Login.LoginFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,7 +59,7 @@ public class forgotpassword extends AppCompatActivity {
         cancel_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent endIntent = new Intent(forgotpassword.this, LoginFragment.class);
+                Intent endIntent = new Intent(forgotpassword.this, blood_requester.class);
                 startActivity(endIntent);
             }
         });
