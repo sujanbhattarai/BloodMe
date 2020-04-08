@@ -23,6 +23,7 @@ public class afterlogin extends AppCompatActivity {
         donate = (Button) findViewById(R.id.Donate);
         exit = (Button)findViewById(R.id.Exit);
 
+
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

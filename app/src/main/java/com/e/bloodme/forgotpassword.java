@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.e.bloodme.Login.LoginFragment;
+//import com.e.bloodme.Login.LoginFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,7 +38,8 @@ public class forgotpassword extends AppCompatActivity {
                 if(Editemail.isEmpty()){
                     toastMessage("Enter the Email Address");
 
-                }else {
+                }
+                else if(isEmailValid(Editemail)) {
 
                     auth.sendPasswordResetEmail(reemail.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -59,10 +60,18 @@ public class forgotpassword extends AppCompatActivity {
         cancel_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent endIntent = new Intent(forgotpassword.this, LoginFragment.class);
+                Intent endIntent = new Intent(forgotpassword.this, blood_requester.class);
                 startActivity(endIntent);
             }
         });
 
     }
+
+    public static boolean isEmailValid(String email) {
+        if (email.contains("@") && email.contains(".com")) {
+            return true;
+        }
+        return false;
+    }
+
 }
