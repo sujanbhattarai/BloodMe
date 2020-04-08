@@ -40,6 +40,15 @@ public class Date {
             System.out.println(e.getMessage());
         }
     }
+
+    public  boolean isdob(String dob) {
+        this.setDate(dob);
+        if(getDate().equalsIgnoreCase(dob)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public String toString() {
         String st = month + "/" + day + "/" + year;
         return st;
@@ -66,11 +75,12 @@ public class Date {
             if(m<1 || m > 12) {
                 //TODO throw an exception
                 throw new Exception("Invalid month");
+            }else{
+                month = m;
             }
         }catch(Exception e) {
             System.out.println(e.getMessage());
         }
-        month =m;
     }
     public void setDay(int d) {
         try {
@@ -85,11 +95,12 @@ public class Date {
             if(d < 1 || d > Days[month]) {
                 //TODO throw an exception
                 throw new Exception("Invalid day");
+            } else {
+                day = d;
             }
         }catch(Exception e) {
             System.out.println(e.getMessage());
         }
-        day = d;
     }
     public boolean isLeap(){
         if((year%4 == 0 && year%100 != 0) || year%400 == 0)

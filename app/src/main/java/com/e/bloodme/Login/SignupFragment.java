@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -97,7 +98,7 @@ public class SignupFragment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean end = validateForm();
-                if(end == true){
+                if(end == true) {
                     user.setEmail(email.getText().toString());
                     user.setFirst(first.getText().toString());
                     user.setLast(last.getText().toString());
@@ -108,7 +109,7 @@ public class SignupFragment extends AppCompatActivity {
                     mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 toastMessage("Successfully registered");
                                 FirebaseUser user1 = mAuth.getCurrentUser();
                                 String id = myRef.push().getKey();
@@ -123,11 +124,11 @@ public class SignupFragment extends AppCompatActivity {
                                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                                if(task.isSuccessful()){
+                                                if (task.isSuccessful()) {
                                                     Intent login = new Intent(getApplicationContext(), afterlogin.class);
                                                     startActivity(login);
                                                     toastMessage("Signed In Successfully");
-                                                }else{
+                                                } else {
                                                     String message = task.getException().toString();
                                                     toastMessage("Error");
                                                 }
@@ -137,9 +138,10 @@ public class SignupFragment extends AppCompatActivity {
                             }
                         }
                     });
-                }else{
-                    toastMessage("Please complete the form");
                 }
+//                }else{
+//                    toastMessage("Please complete the form");
+//                }
 
             }
         });
@@ -182,12 +184,55 @@ public class SignupFragment extends AppCompatActivity {
     private void toastMessage(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
-    public static boolean isEmailValid(CharSequence email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+
+    public static boolean isfirstname(String name){
+        if (TextUtils.isEmpty(name)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public static boolean islastname(String name){
+        if (TextUtils.isEmpty(name)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
+    public static boolean isphoneno(String num) {
+        boolean valid = true;
+        try {
+            long no = Integer.parseInt(num);
+            if(num.length()!=10) {
+                return false;
+            }
+        } catch(Exception e) {
+        }
 
-    public boolean validateForm() {
+        return true;
+
+    }
+
+    public static boolean password(String s) {
+        boolean valid = true;
+
+        if(s.length() < 6) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public static boolean isEmailValid(String email) {
+        if (email.contains("@") && email.contains(".com")) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateForm() {
         boolean valid = true;
 
         String em = email.getText().toString();
@@ -197,31 +242,11 @@ public class SignupFragment extends AppCompatActivity {
         } else {
             email.setError(null);
         }
-        if(!isEmailValid(em)){
-            toastMessage("Your Email Id is Invalid.");
-            valid = false;
-        }
 
 
         String pass = password.getText().toString();
-        if (TextUtils.isEmpty(pass)) {
-            password.setError("Required.");
-            valid = false;
-        } else {
-            password.setError(null);
-        }
-        if(pass.length() <= 6) {
-            toastMessage("Your password must be greater than 6 characters!");
-            valid = false;
-        }
-
-        String mob = mobile.getText().toString();
-        if(mob.length() != 10){
-            toastMessage("Please Enter the Valid Mobile Number!");
-            valid = false;
-        }
+        boolean a = password(pass);
 
         return valid;
     }
-
 }

@@ -28,7 +28,7 @@ public class blooddonate extends AppCompatActivity {
             public void onClick(View view) {
                 boolean end = validateForm();
                 if(end==true) {
-                    Intent startIntent = new Intent(getApplicationContext(), thankyou.class);
+                    Intent startIntent = new Intent(getApplicationContext(), blood_requester.class);
                     startActivity(startIntent);
                 } else {
                     toastMessage("Please complete the form");
@@ -39,7 +39,7 @@ public class blooddonate extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent endIntent = new Intent(getApplicationContext(), afterlogin.class);
+                Intent endIntent = new Intent(getApplicationContext(), blood_requester.class);
                 startActivity(endIntent);
             }
         });

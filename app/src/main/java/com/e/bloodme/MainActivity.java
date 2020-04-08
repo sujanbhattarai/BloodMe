@@ -1,3 +1,4 @@
+
 package com.e.bloodme;
 
 import android.content.Intent;
@@ -18,3 +19,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 }
+
