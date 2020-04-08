@@ -1,28 +1,30 @@
-package com.e.bloodme.Login;
+package com.e.bloodme;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.e.bloodme.R;
-import com.e.bloodme.requested;
+import com.e.bloodme.Login.LoginFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class afterlogin extends AppCompatActivity {
-    Button Donate, request, Exit;
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        setContentView(R.layout.afterlogin);
-        Button Donate = (Button) findViewById(R.id.donate);
-        Button request = (Button) findViewById(R.id.request);
-        //Button Exit = (Button) findViewById(R.id.request);
+    Button request, donate, exit;
 
-        Donate.setOnClickListener(new View.OnClickListener() {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.afterlogin);
+
+        request = (Button) findViewById(R.id.Request);
+        donate = (Button) findViewById(R.id.Donate);
+        exit = (Button)findViewById(R.id.Exit);
+
+
+        donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent startIntent = new Intent(getApplicationContext(), blooddonate.class);
@@ -38,12 +40,15 @@ public class afterlogin extends AppCompatActivity {
             }
         });
 
-//        Exit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent startIntent = new Intent(getApplicationContext(), blood_donate.class);
-//                startActivity(startIntent);
-//            }
-//        });
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent startIntent = new Intent(getApplicationContext(), LoginFragment.class);
+                startActivity(startIntent);
+            }
+        });
+
     }
 }
+
