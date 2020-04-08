@@ -51,7 +51,37 @@ public class blooddonate extends AppCompatActivity {
     private void toastMessage(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
+    public static boolean isAge(int num) {
+        boolean valid = true;
 
+        if(num<1 || num > 100) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public  static String isblood(String blood1) {
+        boolean valid = true;
+        String[] array = {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
+        String a = "NO";
+        for(int i=0; i< array.length; i++) {
+            if(!array[i].equalsIgnoreCase(blood1)) {
+                valid = false;
+            }else{
+                return blood1;
+            }
+        }
+        return "NO";
+    }
+
+//    public static boolean isaddress(String add) {
+//        if (TextUtils.isEmpty(add)) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
     private boolean validateForm() {
         boolean valid = true;
         String name1 = name.getText().toString();
@@ -78,6 +108,7 @@ public class blooddonate extends AppCompatActivity {
         } else {
             blood.setError(null);
         }
+
         String[] array = {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
         for(int i=0; i< array.length; i++) {
             if(!array[i].equalsIgnoreCase(blood1)) {
