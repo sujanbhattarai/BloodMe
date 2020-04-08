@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -182,10 +183,12 @@ public class SignupFragment extends AppCompatActivity {
     private void toastMessage(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
-    boolean isEmailValid(CharSequence email) {
+    public static boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-    private boolean validateForm() {
+
+
+    public boolean validateForm() {
         boolean valid = true;
 
         String em = email.getText().toString();
@@ -195,7 +198,7 @@ public class SignupFragment extends AppCompatActivity {
         } else {
             email.setError(null);
         }
-        if (!isEmailValid(em)){
+        if(!isEmailValid(em)){
             toastMessage("Your Email Id is Invalid.");
             valid = false;
         }
@@ -221,4 +224,5 @@ public class SignupFragment extends AppCompatActivity {
 
         return valid;
     }
+
 }

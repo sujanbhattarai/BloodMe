@@ -38,7 +38,8 @@ public class forgotpassword extends AppCompatActivity {
                 if(Editemail.isEmpty()){
                     toastMessage("Enter the Email Address");
 
-                }else {
+                }
+                else if(isEmailValid(Editemail)) {
 
                     auth.sendPasswordResetEmail(reemail.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -55,11 +56,8 @@ public class forgotpassword extends AppCompatActivity {
                             });
                 }
             }
-<<<<<<< HEAD
         });
-=======
             });
->>>>>>> upstream/master
         cancel_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,4 +67,12 @@ public class forgotpassword extends AppCompatActivity {
         });
 
     }
+
+    public static boolean isEmailValid(String email) {
+        if (email.contains("@") && email.contains(".com")) {
+            return true;
+        }
+        return false;
+    }
+
 }
