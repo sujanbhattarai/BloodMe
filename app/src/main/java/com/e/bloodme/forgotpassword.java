@@ -74,9 +74,4 @@ public class forgotpassword extends AppCompatActivity {
         }
         return false;
     }
-
-
-
-
-
 }
