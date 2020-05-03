@@ -4,42 +4,86 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.e.bloodme.R;
 import com.e.bloodme.afterlogin;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SignupFragment extends AppCompatActivity {
     TextInputEditText email, password, first, last, textInputEditText, textInputEditText2 ;
     EditText dob, mobile;
     Button register, homebutton;
     User user;
-    FirebaseAuth mAuth;
-    FirebaseAuth.AuthStateListener mAuthListener;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message").child("User");
 
     public static final String TAG = "YOUR-TAG-NAME";
 
+    /**
+     * Method that performs RESTful webservice invocations
+     *
+     * @param params
+     */
+    public void invokeWS(RequestParams params){
+
+        // Make RESTful webservice call using AsyncHttpClient object
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://108.225.65.61/useraccount/register/doregister",params ,new AsyncHttpResponseHandler() {
+            // When the response returned by REST has Http response code '200'
+            @Override
+            public void onSuccess(String response) {
+
+                try {
+                    // JSON Object
+                    JSONObject obj = new JSONObject(response);
+                    // When the JSON response has status boolean value assigned with true
+                    if(obj.getBoolean("status")){
+                        // Display successfully registered message using Toast
+                        Toast.makeText(getApplicationContext(), "You are successfully registered!", Toast.LENGTH_LONG).show();
+                        Intent login = new Intent(getApplicationContext(), afterlogin.class);
+                        startActivity(login);
+                    }
+                    // Else display error message
+                    else{
+                        toastMessage("Error");
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+
+                }
+            }
+            // When the response returned by REST has Http response code other than '200'
+            @Override
+            public void onFailure(int statusCode, Throwable error,
+                                  String content) {
+
+                // When Http response code is '404'
+                if(statusCode == 404){
+                    Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
+                }
+                // When Http response code is '500'
+                else if(statusCode == 500){
+                    Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
+                }
+                // When Http response code other than 404, 500
+                else{
+                    Toast.makeText(getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
     public class AsteriskPasswordTransformationMethod extends PasswordTransformationMethod {
         @Override
         public CharSequence getTransformation(CharSequence source, View view) {
@@ -71,7 +115,6 @@ public class SignupFragment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        mAuth = FirebaseAuth.getInstance();
         email = findViewById(R.id.reg_email);
         password = findViewById(R.id.reg_password);
         textInputEditText = findViewById(R.id.textInputEditText);
@@ -98,6 +141,8 @@ public class SignupFragment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean end = validateForm();
+                // Instantiate Http Request Param Object
+                RequestParams params = new RequestParams();
                 if(end == true) {
                     user.setEmail(email.getText().toString());
                     user.setFirst(first.getText().toString());
@@ -106,78 +151,13 @@ public class SignupFragment extends AppCompatActivity {
                     user.setMobile(mobile.getText().toString());
                     user.setPassword(password.getText().toString());
 
-                    mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                toastMessage("Successfully registered");
-                                FirebaseUser user1 = mAuth.getCurrentUser();
-                                String id = myRef.push().getKey();
-                                myRef.child(id).setValue(user);
-//                                String UID = user1.getUid();
-//                                myRef.child(UID).child("User Info").child("Email").setValue(user.getEmail());
-//                                myRef.child(UID).child("User Info").child("First Name").setValue(user.getfirst());
-//                                myRef.child(UID).child("User Info").child("Last Name").setValue(user.getlast());
-//                                myRef.child(UID).child("User Info").child("Date of Birth").setValue(user.getDate());
-//                                myRef.child(UID).child("User Info").child("Mobile").setValue(user.getMobile());
-                                mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
-                                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                                if (task.isSuccessful()) {
-                                                    Intent login = new Intent(getApplicationContext(), afterlogin.class);
-                                                    startActivity(login);
-                                                    toastMessage("Signed In Successfully");
-                                                } else {
-                                                    String message = task.getException().toString();
-                                                    toastMessage("Error");
-                                                }
-
-                                            }
-                                        });
-                            }
-                        }
-                    });
+                    // Put Http parameter username with value of Email Edit View control
+                    params.put("username", email);
+                    // Put Http parameter password with value of Password Edit View control
+                    params.put("password", password);
+                    // Invoke RESTful Web Service with Http parameters
+                    invokeWS(params);
                 }
-//                }else{
-//                    toastMessage("Please complete the form");
-//                }
-
-            }
-        });
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
-                    //User is signed in
-                    Log.d("EmailPassword", "onAuthStateChanged:signed_in:" + user.getUid());
-                    toastMessage("Successfully Signed In with " + user.getEmail());
-
-                }else{
-                    Log.d("EmailPassword", "onAuthStateChanged:signed_out");
-                    toastMessage("Successfully Signed Out ");
-
-                }
-            }
-        };
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                //String value = dataSnapshot.getValue(String.class);
-                Object value = dataSnapshot.getValue();
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
     }

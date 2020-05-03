@@ -8,38 +8,25 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.e.bloodme.forgotpassword;
 import com.e.bloodme.R;
 import com.e.bloodme.afterlogin;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginFragment extends AppCompatActivity {
-    private FirebaseUser currentUser;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
 
     TextInputEditText email, password;
     Button login, signup;
     TextView forgetPassword;
 
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        if(currentUser == null){
-//            Intent login = new Intent(getApplicationContext(), afterlogin.class);
-//            startActivity(login);
-//        }
-//    }
 
     private void toastMessage(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
@@ -75,8 +62,6 @@ public class LoginFragment extends AppCompatActivity {
         password = findViewById(R.id.password_input);
         login = findViewById(R.id.login);
         signup = findViewById(R.id.signup);
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
         forgetPassword = findViewById(R.id.textView4);
 
         password.setTransformationMethod(new AsteriskPasswordTransformationMethod());
@@ -97,27 +82,24 @@ public class LoginFragment extends AppCompatActivity {
             }
         });
 
+
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String em = email.getText().toString();
                 String pass = password.getText().toString();
-                if(!em.equals("") && !pass.equals("")){
-                    mAuth.signInWithEmailAndPassword(em, pass)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful()){
-                                        Intent login = new Intent(LoginFragment.this, afterlogin.class);
-                                        startActivity(login);
-                                        toastMessage("Signed In Successfully");
-                                    }else{
-                                        String message = task.getException().toString();
-                                        toastMessage("Error");
-                                    }
 
-                                }
-                            });
+                // Instantiate Http Request Param Object
+                RequestParams params = new RequestParams();
+
+                if(!em.equals("") && !pass.equals("")){
+                    // Put Http parameter username with value of Email Edit View control
+                    params.put("username", email);
+                    // Put Http parameter password with value of Password Edit Value control
+                    params.put("password", password);
+                    // Invoke RESTful Web Service with Http parameters
+                    invokeWS(params);
                 }else{
                     toastMessage("Please complete the form");
                 }
@@ -126,6 +108,59 @@ public class LoginFragment extends AppCompatActivity {
             }
         });
     }
+    /**
+     * Method that performs RESTful webservice invocations
+     *
+     * @param params
+     */
+    public void invokeWS(RequestParams params){
 
+        // Make RESTful webservice call using AsyncHttpClient object
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://108.225.65.61/useraccount/login/dologin",params ,new AsyncHttpResponseHandler() {
+            // When the response returned by REST has Http response code '200'
+            @Override
+            public void onSuccess(String response) {
+
+                try {
+                    // JSON Object
+                    JSONObject obj = new JSONObject(response);
+                    // When the JSON response has status boolean value assigned with true
+                    if(obj.getBoolean("status")){
+                        Intent login = new Intent(getApplicationContext(), afterlogin.class);
+                        startActivity(login);
+                        toastMessage("Signed In Successfully");
+                    }
+                    // Else display error message
+                    else{
+                        toastMessage("Error");
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+
+                }
+            }
+            // When the response returned by REST has Http response code other than '200'
+            @Override
+            public void onFailure(int statusCode, Throwable error,
+                                  String content) {
+
+                // When Http response code is '404'
+                if(statusCode == 404){
+                    Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
+                }
+                // When Http response code is '500'
+                else if(statusCode == 500){
+                    Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
+                }
+                // When Http response code other than 404, 500
+                else{
+                    Toast.makeText(getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
 
 }
